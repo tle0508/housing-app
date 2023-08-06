@@ -5,6 +5,7 @@ import { HousingLocationComponent } from
 import { HousingService } from '../housing.service';
 import { HousingLocation } from "../housing-location";
 
+
   @Component({
     selector: "app-home",
     standalone: true,
@@ -20,8 +21,9 @@ import { HousingLocation } from "../housing-location";
       </section>
       <section class="results">
       <app-housing-location
-  *ngFor="let housingLocation of filteredLocationList"
-  [housingLocation]="housingLocation"
+  *ngFor="let item of filteredLocationList"
+  [housingLocation]="item"
+  (notify)="notifyFromChild($event)"
 ></app-housing-location>
 
       </section>
@@ -59,6 +61,9 @@ constructor() {
           housingLocation?.city.toLowerCase().includes(text.toLowerCase())
       );
     }
-  
+    notifyFromChild(evt:any){
+      console.log('notify from Child : '+evt);
+      
+    }
   }
   
